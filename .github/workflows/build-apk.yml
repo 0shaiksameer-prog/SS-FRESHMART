@@ -12,14 +12,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract project
+      - name: Find and extract project
+        shell: bash
         run: |
-          mkdir build-project
-          unzip -q SSFreshMart_Android_Project_With_Logo.zip -d build-project
+          mkdir -p build-project
+          ZIP_FILE=$(find . -maxdepth 1 -name 'SSFreshMart_Android_Project*.zip' -print -quit)
+          if [ -z "$ZIP_FILE" ]; then
+            echo "Project ZIP not found"
+            exit 1
+          fi
+          echo "Using: $ZIP_FILE"
+          unzip -q "$ZIP_FILE" -d build-project
 
       - name: Setup Java
         uses: actions/setup-java@v4
-        with
+        with:
           distribution: temurin
           java-version: '17'
 
