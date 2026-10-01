@@ -15,11 +15,11 @@ jobs:
       - name: Extract project
         run: |
           mkdir build-project
-          unzip -q SSFreshMart_Android_Project.zip -d build-project
+          unzip -q SSFreshMart_Android_Project_With_Logo.zip -d build-project
 
       - name: Setup Java
         uses: actions/setup-java@v4
-        with:
+        with
           distribution: temurin
           java-version: '17'
 
