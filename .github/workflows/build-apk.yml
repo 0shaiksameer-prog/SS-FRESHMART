@@ -34,7 +34,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '8.7'
-
+      - name: Enable AndroidX
+        run: |
+          echo "android.useAndroidX=true" >> build-project/SSFreshMart_Android_Project/gradle.properties
+          echo "android.enableJetifier=true" >> build-project/SSFreshMart_Android_Project/gradle.properties
       - name: Build APK
         run: gradle -p build-project/SSFreshMart_Android_Project assembleDebug
 
